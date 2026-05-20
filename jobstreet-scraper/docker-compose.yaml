@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # JobStreet Scraper
+  scraper:
+    build: .
+    container_name: jobstreet-scraper
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./config.yaml:/app/config.yaml
+    environment:
+      - PYTHONUNBUFFERED=1
+      - SCRAPER_HEADLESS=true
+      - SCRAPER_LOG_LEVEL=INFO
+    # Uncomment to run with custom config
+    # command: python main.py --config config.yaml
+
+  # Optional: PostgreSQL for database export
+  postgres:
+    image: postgres:15-alpine
+    container_name: jobstreet-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=jobstreet_jobs
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    # Uncomment to enable
+    # profiles:
+    #   - database
+
+volumes:
+  postgres_data:

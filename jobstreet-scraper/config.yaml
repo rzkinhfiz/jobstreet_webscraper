@@ -1,0 +1,93 @@
+# JobStreet Scraper Configuration
+# Copy this file to config.yaml and customize as needed
+
+# Base scraper settings
+base_url: https://id.jobstreet.com/
+headless: true  # Run browser in headless mode (set to false to see browser)
+browser_type: chromium  # Options: chromium, firefox, webkit
+max_concurrent_pages: 3
+retry_attempts: 3
+retry_delay: 5
+
+# Search configuration
+search:
+  keywords:
+    - "Data Scientist"
+    - "Data Analyst"
+    - "Machine Learning Engineer"
+  
+  locations:
+    - "Kuala Lumpur"
+    - "Selangor"
+    - "Penang"
+    - "Jakarta"
+    - "Bali"
+    # - "All locations"  # Leave empty or comment out for all
+  
+  experience_levels: []
+    # - "Entry level"
+    # - "Mid level"
+    # - "Senior level"
+  
+  job_types: []
+    # - "Full-time"
+    # - "Contract"
+  
+  salary_range: null  # "Up to RM5,000", "RM5,000 - RM10,000", etc.
+  
+  max_pages_per_keyword: 3  # Pages to scrape per keyword
+  max_results: null  # Total results limit (null = unlimited)
+
+# Anti-detection configuration
+anti_detection:
+  use_stealth: true
+  use_playwright_stealth: true
+  random_user_agent: true
+  random_viewport: true
+  disable_images: true  # Faster loading
+  disable_css: false
+  disable_javascript: false
+  
+  # Human-like behavior
+  enable_random_delays: true
+  min_delay: 1.0  # Minimum delay between actions
+  max_delay: 5.0  # Maximum delay between actions
+  
+  enable_random_scrolling: true
+  enable_mouse_movements: true
+  
+  # Connection behavior
+  accept_language: "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7"
+  timeout: 60000  # 60 seconds
+
+# Proxy configuration
+proxy:
+  enabled: false
+  proxy_list:
+    # - "http://proxy1:8080"
+    # - "http://proxy2:8080"
+  use_residential: false
+  proxy_rotation: true
+  proxy_timeout: 30
+
+# Data export configuration
+export:
+  save_json: true
+  save_parquet: true
+  save_csv: false
+  
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  
+  # Database settings (optional)
+  use_database: false
+  db_type: postgresql  # postgresql, mysql, sqlite
+  db_host: 172.19.130.29
+  db_port: 5432
+  db_name: jobstreet_jobs
+  db_user: postgres
+  db_password: "Hulk1234"
+
+# Logging
+log_level: INFO
+log_file: "logs/scraper.log"
