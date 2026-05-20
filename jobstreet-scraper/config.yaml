@@ -82,11 +82,11 @@ export:
   # Database settings (optional)
   use_database: false
   db_type: postgresql  # postgresql, mysql, sqlite
-  db_host: 172.19.130.29
+  db_host: "localhost"
   db_port: 5432
   db_name: jobstreet_jobs
   db_user: postgres
-  db_password: "Hulk1234"
+  db_password: ""
 
 # Logging
 log_level: INFO
